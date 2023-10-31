@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 @Data
@@ -16,12 +15,10 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentId;
-    private String paymentMethod;
-    private Long cardNumber;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate expiryDate;
-    private int securityCode;
+    private LocalDate paymentDate;
+    private Double paymentAmount;
+    private String paymentType;
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "policy_id")
+    private Policy policy;
 }

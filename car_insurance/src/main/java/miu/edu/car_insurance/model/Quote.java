@@ -15,7 +15,9 @@ public class Quote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long quoteId;
     private Double price;
+
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "policy_id")
+    private Policy policy;
+
 }

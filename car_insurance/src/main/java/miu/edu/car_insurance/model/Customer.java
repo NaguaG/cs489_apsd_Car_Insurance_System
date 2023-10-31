@@ -35,12 +35,7 @@ public class Customer {
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
-    @OneToOne
-    @JoinColumn(name = "policy_id")
-    private Policy policy;
     @OneToMany(mappedBy = "customer")
-    private List<Quote> quotes;
-    @OneToMany(mappedBy = "customer")
-    private List<Payment> payments;
+    private List<Billing> billings;
 
 }

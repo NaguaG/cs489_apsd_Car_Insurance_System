@@ -22,4 +22,10 @@ public class Address {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    public Address(String street, String city, String state, String zipcode) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+    }
 }

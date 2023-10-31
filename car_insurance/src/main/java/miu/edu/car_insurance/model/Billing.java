@@ -11,23 +11,17 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "vehicles")
-public class Vehicle {
+@Table(name = "billings")
+public class Billing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long vehicleId;
-    private String make;
-    private Long mileage;
-    private String vinNumber;
+    private Long billingId;
+    private String billingMethod;
+    private Long cardNumber;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate createdDate;
-    private boolean active;
-
+    private LocalDate expiryDate;
+    private int securityCode;
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
-    @OneToOne
-    @JoinColumn(name = "policy_id")
-    private Policy policy;
-
 }

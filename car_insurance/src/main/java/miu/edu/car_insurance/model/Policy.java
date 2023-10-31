@@ -28,8 +28,11 @@ public class Policy {
     private Double totalAmount;
     private boolean active;
     @OneToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private Vehicle vehicle;
     @OneToMany(mappedBy = "policy")
     private List<Coverage> coverages;
+    @OneToMany(mappedBy = "policy")
+    private List<Quote> quotes;
+    @OneToMany(mappedBy = "policy")
+    private List<Payment> payments;
 }
