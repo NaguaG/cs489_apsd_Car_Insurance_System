@@ -1,5 +1,7 @@
 package miu.edu.car_insurance.controller;
 
+import miu.edu.car_insurance.dto.customer.CustomerRequest;
+import miu.edu.car_insurance.dto.customer.CustomerResponse;
 import miu.edu.car_insurance.model.Address;
 import miu.edu.car_insurance.model.Customer;
 import miu.edu.car_insurance.service.CustomerService;
