@@ -15,3 +15,6 @@ Aim to use Microservice.
 1. Customers Service 
 2. Quotes Service
 3. Coverages Service
+
+# ER Diagram
+![](/Users/naranguaganbaatar/Downloads/Car_Insurance.png)
