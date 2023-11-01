@@ -24,4 +24,18 @@ public class Billing {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+    public Billing(String billingMethod, Long cardNumber, LocalDate expiryDate, int securityCode, Customer customer){
+        this.billingMethod = billingMethod;
+        this.cardNumber = cardNumber;
+        this.expiryDate = expiryDate;
+        this.securityCode = securityCode;
+        this.customer = customer;
+    }
+    public Billing(String billingMethod, Long cardNumber, LocalDate expiryDate, int securityCode){
+        this.billingMethod = billingMethod;
+        this.cardNumber = cardNumber;
+        this.expiryDate = expiryDate;
+        this.securityCode = securityCode;
+    }
+
 }

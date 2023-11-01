@@ -35,4 +35,18 @@ public class Policy {
     private List<Quote> quotes;
     @OneToMany(mappedBy = "policy")
     private List<Payment> payments;
+
+    public Policy(String policyNumber, LocalDate effectiveDate, LocalDate createdDate, LocalDate expiredDate,
+                  Double totalAmount, List<Coverage> coverages, List<Quote> quotes) {
+        this.policyNumber = policyNumber;
+        this.effectiveDate = effectiveDate;
+        this.createdDate = createdDate;
+        this.expiredDate = expiredDate;
+        this.totalAmount = totalAmount;
+        this.coverages = coverages;
+        this.quotes = quotes;
+
+    }
+
+
 }

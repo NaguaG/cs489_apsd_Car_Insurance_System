@@ -1,7 +1,12 @@
 package miu.edu.car_insurance.controller;
 
+import jakarta.validation.Valid;
+import miu.edu.car_insurance.dto.address.AddressRequest;
+import miu.edu.car_insurance.dto.address.AddressResponse;
 import miu.edu.car_insurance.model.Address;
+import miu.edu.car_insurance.repo.AddressRepository;
 import miu.edu.car_insurance.service.AddressService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,24 +14,26 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/adsweb/api/v1/addresses")
 public class AddressController {
-    private AddressService addressService;
+    private final AddressService addressService;
     public AddressController(AddressService addressService){
         this.addressService = addressService;
     }
     @GetMapping(value = "/list")
-    public List<Address> getAllAddress(){
-        return addressService.getAllAddresses();
+    public ResponseEntity<List<AddressResponse>> getAllAddress(){
+
+        return ResponseEntity.ok(addressService.getAllAddresses());
     }
     @GetMapping(value = "/get/{addressId}")
-    public  Address getAddressById(@PathVariable Long addressId){
-        return addressService.getAddressById(addressId);
+    public ResponseEntity<AddressResponse> getAddressById(@PathVariable Long addressId){
+        return ResponseEntity.ok(addressService.getAddressById(addressId));
     }
     @PutMapping(value = "/update/{addressId}")
-    public Address updateAddress(@PathVariable Long addressId, @RequestBody Address address){
-        return addressService.updateAddress(addressId, address);
+    public ResponseEntity<AddressResponse> updateAddress(@PathVariable Long addressId, @RequestBody AddressRequest addressRequest){
+        return ResponseEntity.ok(addressService.updateAddress(addressId, addressRequest));
     }
     @DeleteMapping(value = "/delete/{addressId}")
     public void deleteAddress(@PathVariable Long addressId){
+
         addressService.deleteAddressById(addressId);
     }
     @DeleteMapping(value = "/delete/{customerId}")
@@ -34,7 +41,7 @@ public class AddressController {
         addressService.deleteCustomerAddressById(customerId);
     }
     @PostMapping(value = "/new")
-    public Address addNewAddress(Address address){
-        return addressService.addNewAddress(address);
+    public ResponseEntity<AddressResponse> addNewAddress(@Valid @RequestBody AddressRequest addressRequest){
+        return new ResponseEntity<>(addressService.addNewAddress(addressRequest), HttpStatus.CREATED);
     }
 }

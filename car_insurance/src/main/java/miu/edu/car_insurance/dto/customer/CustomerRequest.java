@@ -2,9 +2,13 @@ package miu.edu.car_insurance.dto.customer;
 import jakarta.validation.constraints.NotBlank;
 import miu.edu.car_insurance.dto.address.AddressRequest;
 import miu.edu.car_insurance.dto.billing.BillingRequest;
+import miu.edu.car_insurance.dto.billing.BillingRequest2;
+import miu.edu.car_insurance.dto.vehicle.VehicleRequest;
+import miu.edu.car_insurance.dto.vehicle.VehicleRequest2;
 import miu.edu.car_insurance.model.Billing;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public record CustomerRequest(
     @NotBlank(message = "Customer firstname is required, not be null or empty !!!")
@@ -23,10 +27,13 @@ public record CustomerRequest(
     LocalDate licenseIssuedDate,
     @NotBlank(message = "Customer license issued state is required, not be null or empty !!!")
     String licenseIssuedState,
+    LocalDate accountCreatedDate,
+    boolean active,
+    List<VehicleRequest2> vehicles,
     @NotBlank(message = "Address is required, not be null or empty !!!")
     AddressRequest address,
-    @NotBlank(message = "Billing information is required, not be null or empty !!!")
-    BillingRequest billing
+    //@NotBlank(message = "Billing information is required, not be null or empty !!!")
+    List<BillingRequest2> billing
     ){
 
 }

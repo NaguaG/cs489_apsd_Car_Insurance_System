@@ -21,4 +21,9 @@ public class Payment {
     @ManyToOne
     @JoinColumn(name = "policy_id")
     private Policy policy;
+    public Payment(LocalDate paymentDate, Double paymentAmount, String paymentType){
+        this.paymentDate = paymentDate;
+        this.paymentAmount = paymentAmount;
+        this.paymentType = paymentType;
+    }
 }

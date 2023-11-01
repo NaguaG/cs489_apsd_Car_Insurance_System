@@ -18,12 +18,7 @@ public record VehicleRequest(
         @NotBlank(message = "Vin number is required, not be blank or null !!!")
         String vinNumber,
         @NotBlank(message = "Created date is required, not be blank or null !!!")
-        LocalDate createdDate,
-        Customer customer,
-        Policy policy
-
-
-
+        LocalDate createdDate
 
 ) {
 

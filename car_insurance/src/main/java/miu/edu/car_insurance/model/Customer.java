@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import miu.edu.car_insurance.dto.address.AddressResponse;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -37,5 +38,19 @@ public class Customer {
     private Address address;
     @OneToMany(mappedBy = "customer")
     private List<Billing> billings;
+
+    public Customer(String firstName, String lastName, LocalDate dob, String ssn, String gender,
+                    String email, LocalDate licenseIssuedDate, String licenseIssuedState, Address address){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.ssn =ssn;
+        this.gender = gender;
+        this.email = email;
+        this.licenseIssuedDate = licenseIssuedDate;
+        this.licenseIssuedState = licenseIssuedState;
+        this.address = address;
+
+    }
 
 }

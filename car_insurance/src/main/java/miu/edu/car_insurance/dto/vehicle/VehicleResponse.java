@@ -10,8 +10,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 public record VehicleResponse(
-        Long vehicleId, String make, Long mileage, String vinNumber, LocalDate createdDate, boolean active,
-        Customer customer, Policy policy
+        Long vehicleId, String make, Long mileage, String vinNumber, LocalDate createdDate, boolean active
+
 ) {
 
 }

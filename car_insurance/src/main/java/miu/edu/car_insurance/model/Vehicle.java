@@ -30,4 +30,10 @@ public class Vehicle {
     @JoinColumn(name = "policy_id")
     private Policy policy;
 
+    public Vehicle(String make, Long mileage, String vinNumber, LocalDate createdDate) {
+        this.make = make;
+        this.mileage = mileage;
+        this.vinNumber = vinNumber;
+        this.createdDate = createdDate;
+    }
 }

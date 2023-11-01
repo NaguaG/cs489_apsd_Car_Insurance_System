@@ -20,5 +20,10 @@ public class Coverage {
     @JoinColumn(name = "policy_id")
     private Policy policy;
 
+    public Coverage(String coverageName, Double coveragePrice){
+        this.coverageName = coverageName;
+        this.coveragePrice = coveragePrice;
+    }
+
 
 }

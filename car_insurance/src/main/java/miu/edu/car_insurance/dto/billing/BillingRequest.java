@@ -16,7 +16,8 @@ public record BillingRequest(
         @NotBlank(message = "Expiry date is required, not be null or empty !!!")
         LocalDate expiryDate,
         @NotBlank(message = "Security code is required, not be null or empty !!!")
-        int securityCode
+        int securityCode,
+        Customer customer
 
 ) {
 

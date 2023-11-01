@@ -19,5 +19,8 @@ public class Quote {
     @ManyToOne
     @JoinColumn(name = "policy_id")
     private Policy policy;
+    public Quote(Double price){
+        this.price = price;
+    }
 
 }

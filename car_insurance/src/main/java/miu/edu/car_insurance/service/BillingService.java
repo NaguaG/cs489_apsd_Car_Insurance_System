@@ -1,13 +1,15 @@
 package miu.edu.car_insurance.service;
 
+import miu.edu.car_insurance.dto.billing.BillingRequest;
+import miu.edu.car_insurance.dto.billing.BillingResponse;
 import miu.edu.car_insurance.model.Billing;
 
 import java.util.List;
 
 public interface BillingService {
-    public List<Billing> getAllBillings();
-    public Billing getBillingById(Long billingId);
-    public Billing updateBilling(Long billingId, Billing billing);
+    public List<BillingResponse> getAllBillings();
+    public BillingResponse getBillingById(Long billingId);
+    public BillingResponse updateBilling(Long billingId, BillingRequest billingRequest);
     public void deleteBillingById(Long billingId);
-    public Billing addNewBilling(Billing billing);
+    public BillingResponse addNewBilling(BillingRequest billingRequest);
 }

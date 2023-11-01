@@ -1,15 +1,18 @@
 package miu.edu.car_insurance.service;
 
+import miu.edu.car_insurance.dto.address.AddressRequest;
+import miu.edu.car_insurance.dto.address.AddressResponse;
 import miu.edu.car_insurance.model.Address;
 import miu.edu.car_insurance.model.Customer;
+import miu.edu.car_insurance.repo.AddressRepository;
 
 import java.util.List;
 
 public interface AddressService {
-    public List<Address> getAllAddresses();
-    public Address getAddressById(Long addressId);
-    public Address updateAddress(Long addressId, Address address);
+    public List<AddressResponse> getAllAddresses();
+    public AddressResponse getAddressById(Long addressId);
+    public AddressResponse updateAddress(Long addressId, AddressRequest addressRequest);
     public void deleteCustomerAddressById(Long customerId);
     public void deleteAddressById(Long addressId);
-    public Address addNewAddress(Address address);
+    public AddressResponse addNewAddress(AddressRequest addressRequest);
 }
