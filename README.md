@@ -17,4 +17,4 @@ Aim to use Microservice.
 3. Coverages Service
 
 # ER Diagram
-![](/Users/naranguaganbaatar/Downloads/Car_Insurance.png)
+![](/Users/naranguaganbaatar/Desktop/E-R diagram.png)
