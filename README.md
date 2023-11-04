@@ -17,4 +17,4 @@ Aim to use Microservice.
 3. Coverages Service
 
 # ER Diagram
-![](/Users/naranguaganbaatar/Desktop/E-R diagram.png)
+<img width="648" alt="E-R diagram" src="https://github.com/NaguaG/cs489_apsd_Car_Insurance_System/assets/82986724/4b4653a3-ec43-4271-bf9d-7616165808a6">
