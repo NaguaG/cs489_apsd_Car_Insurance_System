@@ -10,6 +10,7 @@ import java.util.List;
 
 public record CustomerResponse3(
         Long customerId, String firstName, String lastName, LocalDate dob, String ssn, String gender,
-        String email, LocalDate licenseIssuedDate, String licenseIssuedState, AddressResponse addressResponse
+        String email, LocalDate licenseIssuedDate, String licenseIssuedState, LocalDate accountCreatedDate,
+        boolean active, AddressResponse addressResponse
 ) {
 }

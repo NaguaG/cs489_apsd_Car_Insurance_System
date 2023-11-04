@@ -7,6 +7,7 @@ import miu.edu.car_insurance.repo.AddressRepository;
 import miu.edu.car_insurance.service.AddressService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,12 +57,12 @@ public class AddressServiceImpl implements AddressService {
    }
 
     @Override
-    public void deleteCustomerAddressById(Long customerId) {
+    public void deleteCustomerAddressById(@PathVariable("customerId") Long customerId) {
         addressRepository.deleteById(customerId);
     }
 
     @Override
-    public void deleteAddressById(Long addressId) {
+    public void deleteAddressById(@PathVariable("id") Long addressId) {
         addressRepository.deleteById(addressId);
     }
 

@@ -18,7 +18,7 @@ public class Address {
     private String city;
     private String state;
     private String zipcode;
-    @OneToOne
+    @OneToOne(mappedBy = "address")
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

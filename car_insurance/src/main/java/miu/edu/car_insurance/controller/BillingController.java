@@ -3,6 +3,7 @@ package miu.edu.car_insurance.controller;
 import jakarta.validation.Valid;
 import miu.edu.car_insurance.dto.billing.BillingRequest;
 import miu.edu.car_insurance.dto.billing.BillingResponse;
+import miu.edu.car_insurance.dto.billing.BillingResponse2;
 import miu.edu.car_insurance.model.Billing;
 import miu.edu.car_insurance.model.Customer;
 import miu.edu.car_insurance.service.BillingService;
@@ -20,24 +21,24 @@ public class BillingController {
         this.billingService = billingService;
     }
     @GetMapping(value = "/list")
-    public ResponseEntity<List<BillingResponse>> getAllBillingInfo(){
+    public ResponseEntity<List<BillingResponse2>> getAllBillingInfo(){
 
         return ResponseEntity.ok( billingService.getAllBillings());
     }
     @GetMapping(value = "/get/{billingId}")
-    public  ResponseEntity<BillingResponse> getBillingById(@PathVariable Long billingId){
+    public  ResponseEntity<BillingResponse2> getBillingById(@PathVariable Long billingId){
         return ResponseEntity.ok(billingService.getBillingById(billingId));
     }
-    @PutMapping(value = "/update/{billingId}")
-    public ResponseEntity<BillingResponse> updateBilling(@PathVariable Long billingId, @RequestBody BillingRequest billingRequest){
-        return ResponseEntity.ok(billingService.updateBilling(billingId, billingRequest));
+    @PutMapping(value = "/update/{customerId}/{billingId}")
+    public ResponseEntity<BillingResponse> updateBilling(@PathVariable Long customerId, @PathVariable Long billingId, @RequestBody BillingRequest billingRequest){
+        return ResponseEntity.ok(billingService.updateBilling(customerId, billingId, billingRequest));
     }
     @DeleteMapping(value = "/delete/{billingId}")
     public void deleteBilling(@PathVariable Long billingId){
         billingService.deleteBillingById(billingId);
     }
-    @PostMapping(value = "/new")
-    public ResponseEntity<BillingResponse> addNewBilling(@Valid @RequestBody BillingRequest billingRequest){
-        return new ResponseEntity<>(billingService.addNewBilling(billingRequest), HttpStatus.CREATED);
+    @PostMapping(value = "/new/{customerId}")
+    public ResponseEntity<BillingResponse> addNewBilling(@PathVariable Long customerId, @Valid @RequestBody BillingRequest billingRequest){
+        return new ResponseEntity<>(billingService.addNewBilling(customerId, billingRequest), HttpStatus.CREATED);
     }
 }

@@ -28,10 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 @Service
 public class CustomerServiceImpl implements CustomerService {
-    private CustomerRepository customerRepository;
-    private AddressRepository addressRepository;
-    private BillingRepository billingRepository;
-    private VehicleRepository vehicleRepository;
+    private final CustomerRepository customerRepository;
+    private final AddressRepository addressRepository;
+    private final BillingRepository billingRepository;
+    private final VehicleRepository vehicleRepository;
     public CustomerServiceImpl(CustomerRepository customerRepository, AddressRepository addressRepository,
                                BillingRepository billingRepository, VehicleRepository vehicleRepository){
         this.customerRepository = customerRepository;
@@ -56,7 +56,8 @@ public class CustomerServiceImpl implements CustomerService {
                         c.isActive(),
                         c.getVehicles()
                                 .stream().map(v -> new VehicleResponse2(v.getVehicleId(), v.getMake())).toList(),
-                        c.getAddress(),
+                        new AddressResponse(c.getAddress().getAddressId(), c.getAddress().getStreet(), c.getAddress().getCity(),
+                                c.getAddress().getState(), c.getAddress().getZipcode()),
                         c.getBillings()
                                 .stream().map(b -> new BillingResponse2(b.getBillingId(), b.getBillingMethod(),
                                         b.getCardNumber(), b.getExpiryDate())).toList()
@@ -71,7 +72,9 @@ public class CustomerServiceImpl implements CustomerService {
                 customer.getDob(), customer.getSsn(), customer.getGender(), customer.getEmail(), customer.getLicenseIssuedDate(),
                 customer.getLicenseIssuedState(), customer.getAccountCreatedDate(), customer.isActive(),
                 customer.getVehicles().stream().map(v -> new VehicleResponse2(v.getVehicleId(), v.getMake())).toList(),
-                customer.getAddress(), customer.getBillings().stream().map(b -> new BillingResponse2(b.getBillingId(), b.getBillingMethod(),
+                new AddressResponse(customer.getAddress().getAddressId(), customer.getAddress().getStreet(), customer.getAddress().getCity(),
+                        customer.getAddress().getState(), customer.getAddress().getZipcode()),
+                customer.getBillings().stream().map(b -> new BillingResponse2(b.getBillingId(), b.getBillingMethod(),
                 b.getCardNumber(), b.getExpiryDate())).toList());
     }
 
@@ -89,46 +92,47 @@ public class CustomerServiceImpl implements CustomerService {
             curr.setLicenseIssuedState(customerRequest.licenseIssuedState());
             curr.setAccountCreatedDate(customerRequest.accountCreatedDate());
             curr.setActive(customerRequest.active());
-            for(VehicleRequest2 newV: customerRequest.vehicles()){
-                Long id = newV.vehicleId();
-                for(Vehicle v: curr.getVehicles()){
-                    if( v.getVehicleId() == id){
-                        v.setMake(newV.make());
-                        v.setMileage(newV.mileage());
-                        v.setVinNumber(newV.vinNumber());
-                        v.setPolicy(newV.policy());
-                    }
-                }
-            }
+//            for(VehicleRequest2 newV: customerRequest.vehicles()){
+//                Long id = newV.vehicleId();
+//                for(Vehicle v: curr.getVehicles()){
+//                    if( v.getVehicleId() == id){
+//                        v.setMake(newV.make());
+//                        v.setMileage(newV.mileage());
+//                        v.setVinNumber(newV.vinNumber());
+//                        v.setPolicy(newV.policy());
+//                    }
+//                }
+//            }
 
-            vehicleRepository.saveAll(curr.getVehicles());
+//            vehicleRepository.saveAll(curr.getVehicles());
 
 
             //Could be call from addressService
             Address updatedAddress = new Address(customerRequest.address().street(), customerRequest.address().city(), customerRequest.address().state(),
                     customerRequest.address().zipcode());
-            addressRepository.save(updatedAddress);
+//            addressRepository.save(updatedAddress);
             curr.setAddress(updatedAddress);
 
-            for(BillingRequest2 newB: customerRequest.billing()){
-                Long id = newB.billingId();
-                for(Billing b: curr.getBillings()){
-                    if(b.getBillingId() == id){
-                        b.setBillingMethod(newB.billingMethod());
-                        b.setCardNumber(newB.cardNumber());
-                        b.setExpiryDate(newB.expiryDate());
-                        b.setSecurityCode(newB.securityCode());
-                    }
-                }
-            }
-            billingRepository.saveAll(curr.getBillings());
+//            for(BillingRequest2 newB: customerRequest.billing()){
+//                Long id = newB.billingId();
+//                for(Billing b: curr.getBillings()){
+//                    if(b.getBillingId() == id){
+//                        b.setBillingMethod(newB.billingMethod());
+//                        b.setCardNumber(newB.cardNumber());
+//                        b.setExpiryDate(newB.expiryDate());
+//                        b.setSecurityCode(newB.securityCode());
+//                    }
+//                }
+//            }
+ //           billingRepository.saveAll(curr.getBillings());
 
             Customer updated = customerRepository.save(curr);
             return new CustomerResponse(updated.getCustomerId(), updated.getFirstName(), updated.getLastName(),
                     updated.getDob(), updated.getSsn(), updated.getGender(), updated.getEmail(), updated.getLicenseIssuedDate(),
                     updated.getLicenseIssuedState(), updated.getAccountCreatedDate(), updated.isActive(),
                     updated.getVehicles().stream().map(v -> new VehicleResponse2(v.getVehicleId(), v.getMake())).toList(),
-                    updated.getAddress(), updated.getBillings().stream()
+                    new AddressResponse(updated.getAddress().getAddressId(), updated.getAddress().getStreet(), updated.getAddress().getCity(),
+                            updated.getAddress().getState(), updated.getAddress().getZipcode()), updated.getBillings().stream()
                     .map(b -> new BillingResponse2(b.getBillingId(), b.getBillingMethod(), b.getCardNumber(), b.getExpiryDate())).toList());
         }else{
             return null;
@@ -145,12 +149,12 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerResponse3 addNewCustomer(CustomerRequest customerRequest) {
         Customer customer = new Customer(customerRequest.firstName(), customerRequest.lastName(), customerRequest.dob(),
                 customerRequest.ssn(), customerRequest.gender(), customerRequest.email(), customerRequest.licenseIssuedDate(),
-                customerRequest.licenseIssuedState(), new Address(customerRequest.address().street(), customerRequest.address().city(),
+                customerRequest.licenseIssuedState(), customerRequest.accountCreatedDate(), customerRequest.active(), new Address(customerRequest.address().street(), customerRequest.address().city(),
                 customerRequest.address().state(), customerRequest.address().zipcode()));
         Customer updated = customerRepository.save(customer);
         return new CustomerResponse3(updated.getCustomerId(), updated.getFirstName(), updated.getLastName(), updated.getDob(),
-                updated.getSsn(), updated.getGender(), updated.getEmail(), updated.getLicenseIssuedDate(), updated.getLicenseIssuedState(),
-                new AddressResponse(updated.getAddress().getAddressId(), updated.getAddress().getStreet(), updated.getAddress().getCity(),
-                        updated.getAddress().getState(), updated.getAddress().getZipcode()));
+                updated.getSsn(), updated.getGender(), updated.getEmail(), updated.getLicenseIssuedDate(), updated.getLicenseIssuedState(), updated.getAccountCreatedDate(),
+                updated.isActive(), new AddressResponse(updated.getAddress().getAddressId(), updated.getAddress().getStreet(),
+                updated.getAddress().getCity(), updated.getAddress().getState(), updated.getAddress().getZipcode()));
     }
 }

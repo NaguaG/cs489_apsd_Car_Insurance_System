@@ -36,10 +36,10 @@ public class AddressController {
 
         addressService.deleteAddressById(addressId);
     }
-    @DeleteMapping(value = "/delete/{customerId}")
-    public void deleteAddressByCustomerId(@PathVariable Long customerId){
-        addressService.deleteCustomerAddressById(customerId);
-    }
+//    @DeleteMapping(value = "/delete/{customerId}")
+//    public void deleteAddressByCustomerId(@PathVariable("customerId") Long customerId){
+//        addressService.deleteCustomerAddressById(customerId);
+//    }
     @PostMapping(value = "/new")
     public ResponseEntity<AddressResponse> addNewAddress(@Valid @RequestBody AddressRequest addressRequest){
         return new ResponseEntity<>(addressService.addNewAddress(addressRequest), HttpStatus.CREATED);

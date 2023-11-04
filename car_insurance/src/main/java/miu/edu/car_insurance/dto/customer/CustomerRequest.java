@@ -1,5 +1,7 @@
 package miu.edu.car_insurance.dto.customer;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import miu.edu.car_insurance.dto.address.AddressRequest;
 import miu.edu.car_insurance.dto.billing.BillingRequest;
 import miu.edu.car_insurance.dto.billing.BillingRequest2;
@@ -15,25 +17,26 @@ public record CustomerRequest(
     String firstName,
     @NotBlank(message = "Customer lastname is required, not be null or empty !!!")
     String lastName,
-    @NotBlank(message = "Customer date of birth is required, not be null or empty !!!")
+    @NotNull(message = "Customer date of birth is required, not be null or empty !!!")
     LocalDate dob,
     @NotBlank(message = "Customer ssn is required, not be null or empty !!!")
     String ssn,
     @NotBlank(message = "Customer gender is required, not be null or empty !!!")
     String gender,
     @NotBlank(message = "Customer email is required, not be null or empty !!!")
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "Invalid email format")
     String email,
-    @NotBlank(message = "Customer license issued date is required, not be null or empty !!!")
+    @NotNull(message = "Customer license issued date is required, not be null or empty !!!")
     LocalDate licenseIssuedDate,
-    @NotBlank(message = "Customer license issued state is required, not be null or empty !!!")
+    @NotNull(message = "Customer license issued state is required, not be null or empty !!!")
     String licenseIssuedState,
     LocalDate accountCreatedDate,
     boolean active,
-    List<VehicleRequest2> vehicles,
-    @NotBlank(message = "Address is required, not be null or empty !!!")
-    AddressRequest address,
+//    List<VehicleRequest2> vehicles,
+ //   @NotBlank(message = "Address is required, not be null or empty !!!")
+    AddressRequest address
     //@NotBlank(message = "Billing information is required, not be null or empty !!!")
-    List<BillingRequest2> billing
+  //  List<BillingRequest2> billing
     ){
 
 }

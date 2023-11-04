@@ -21,7 +21,7 @@ public class Billing {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expiryDate;
     private int securityCode;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
     public Billing(String billingMethod, Long cardNumber, LocalDate expiryDate, int securityCode, Customer customer){

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class CoverageServiceImpl implements CoverageService {
-    private CoverageRepository coverageRepository;
+    private final CoverageRepository coverageRepository;
     public CoverageServiceImpl(CoverageRepository coverageRepository){
         this.coverageRepository = coverageRepository;
     }
